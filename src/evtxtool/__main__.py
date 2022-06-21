@@ -14,13 +14,13 @@ def main():
 
 
 @main.command()
-@click.option('--conf', default='', help='path of configuration file')
-@click.option('--path', default='', help='csv file path')
-@click.option('--out', default='', help='output filename except the extension')
+@click.option('--infile', default='', help='csv file path')
+@click.option('--outfile', default='', help='output filename except the extension')
 @click.pass_context
-def json2csv(ctx, conf, path, out):
-    print_help(ctx, None, value=path is None)
-    evtxtool.evtx.json2csv(conf, path, out)
+def json2csv(ctx, infile, outfile):
+    print_help(ctx, None, value=infile=='' or outfile=='')
+    tool = evtxtool.evtx.Json2csv(infile, outfile)
+    tool.run()
 
 
 if __name__ == '__main__':
