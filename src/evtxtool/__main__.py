@@ -40,7 +40,9 @@ class Tool:
             os.mkdir(tmp_dir)
 
             eprint(f'[+] Run evtx file dump with {evtx_bin}')
-            os.system(f'{evtx_bin} {infile} -o jsonl -f {tmp_dir}/json')
+            os.system(
+                f'{evtx_bin} {infile} -o jsonl -f {tmp_dir}/json --ansi-codec "utf-8"'
+            )
 
             eprint(f'[+] Run convert dump data to csv format')
             Tool.json2csv(f'{tmp_dir}/json', outfile)

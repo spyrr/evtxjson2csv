@@ -6,7 +6,7 @@ from os.path import basename, splitext, exists
 from setuptools import find_packages, setup
 
 PROJECT_NAME = 'evtxtool'
-VERSION = '0.0.3'
+VERSION = '0.2.0'
 DESCRIPTION = 'Convert an evtx file (GitHub.com/omerbenamram/evtx) to json.'
 AUTHOR = 'Hosub Lee'
 EMAIL = 'spyrr83@gmail.com'
