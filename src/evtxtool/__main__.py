@@ -55,7 +55,7 @@ class Tool:
 
 @click.group()
 def main():
-    pass
+    eprint('EVTXTool v0.2.1\n')
 
 
 @main.command()
@@ -78,7 +78,7 @@ def evtx2csv(ctx, evtx_bin, infile, outfile):
 
     if evtx_bin == '': # Check default binary
         evtx_bin = os.path.dirname(os.path.realpath(__file__))
-        evtx_bin += f'/../bin/{evtx_dump}'
+        evtx_bin += f'/bin/{evtx_dump}'
 
     if os.path.exists(evtx_bin):
         evtx_err = False

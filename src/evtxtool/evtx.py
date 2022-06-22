@@ -17,8 +17,12 @@ class Json2csv:
         self.delimeter = ':'
         self.csv_line = []
         self.enable_multiline = False
-        self.out = open(outfile, 'w') if outfile != '' else sys.stdout
         self.is_no_column_needed = True
+
+        if outfile != '':
+            self.out = open(outfile, 'wt', encoding='UTF8')
+        else:
+            self.out = sys.stdout
 
     def __del__(self):
         if self.out != sys.stdout:
@@ -36,7 +40,7 @@ class Json2csv:
                 self.headers.append(header)
 
     def __build_headers(self):
-        with open(self.infile, 'r') as f:
+        with open(self.infile, 'rt', encoding='UTF8') as f:
             for line in f:
                 self.num_of_lines += 1
                 j = json.loads(line)
@@ -72,7 +76,7 @@ class Json2csv:
         print(str_headers, file=out)
 
     def __write_csv_contents(self, out):
-        with open(self.infile, 'r') as f:
+        with open(self.infile, 'rt', encoding='UTF8') as f:
             for i, line in enumerate(
                 tqdm(f, total=self.num_of_lines)
             ):
@@ -82,12 +86,10 @@ class Json2csv:
                 self.__json_to_csv(json.loads(line))
                 print(','.join(f'"{s}"' for s in self.csv_line), file=out)
 
-
     def to_csv(self):
         # print contents
         self.__write_csv_headers(self.out)
         self.__write_csv_contents(self.out)
-
 
     def run(self):
         print(

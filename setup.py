@@ -5,8 +5,9 @@ from glob import glob
 from os.path import basename, splitext, exists
 from setuptools import find_packages, setup
 
+
 PROJECT_NAME = 'evtxtool'
-VERSION = '0.2.0'
+VERSION = '0.2.1'
 DESCRIPTION = 'Convert an evtx file (GitHub.com/omerbenamram/evtx) to json.'
 AUTHOR = 'Hosub Lee'
 EMAIL = 'spyrr83@gmail.com'
@@ -27,11 +28,10 @@ ENTRYPOINTS = {
 EVTX_DUMP = 'bin/evtx_dump' + ('.exe' if platform.system() == 'Windows' else '')
 
 if os.path.exists(f'src/{EVTX_DUMP}'):
-    DATAFILES = [('bin', [f'src/{EVTX_DUMP}',]),]
+    DATAFILES = [(PROJECT_NAME + '/bin', [f'src/{EVTX_DUMP}',]),]
 else:
     DATAFILES = []
 KEYWORDS = ['evtx', 'json', 'csv', 'convert']
-#DATAFILES = [('data', ['src/data/template.xlsm',]),]
 
 setup(
     name=PROJECT_NAME,
