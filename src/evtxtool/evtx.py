@@ -4,7 +4,7 @@ import sys
 from tqdm import tqdm
 
 
-# SAMPLE = '../../data/Security_big_sample.json'
+SAMPLE = '../../data/Security_big_sample.json'
 
 
 class Json2csv:
@@ -85,27 +85,24 @@ class Json2csv:
 
     def to_csv(self):
         # print contents
-        print(f'[*] Save to {self.outfile} file.', file=sys.stderr)
         self.__write_csv_headers(self.out)
         self.__write_csv_contents(self.out)
 
 
     def run(self):
         print(
-            f'[*] Loading headers from all objects in file, {self.infile}',
+            f'[+] Loading headers from all objects in file, {self.infile}',
             file=sys.stderr
         )
         self.__build_headers()
         print(
-            f'[*] {len(self.header_idx)} headers were loaded.',
+            f'[+] {len(self.header_idx)} headers were loaded.',
             file=sys.stderr
         )
-        print(f'[*] Start to convert from JSON to CSV', file=sys.stderr)
+        print(f'[+] Start to convert from JSON to CSV', file=sys.stderr)
         self.to_csv()
-        print(f'[*] Done', file=sys.stderr)
 
 
-# if __name__ == '__main__':
-#     tool = Json2csv('', SAMPLE, 'test1.csv')
-#     tool.run()
-
+if __name__ == '__main__':
+    tool = Json2csv('', SAMPLE, 'test1.csv')
+    tool.run()

@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-import io
+import platform
+import os
 from glob import glob
 from os.path import basename, splitext, exists
 from setuptools import find_packages, setup
 
 PROJECT_NAME = 'evtxtool'
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 DESCRIPTION = 'Convert an evtx file (GitHub.com/omerbenamram/evtx) to json.'
+AUTHOR = 'Hosub Lee'
 EMAIL = 'spyrr83@gmail.com'
 
 REQUIREMENTS_FILENAME='./requirements.txt'
@@ -21,15 +23,21 @@ ENTRYPOINTS = {
         f'{PROJECT_NAME} = evtxtool:main', 
     ],
 }
-DATAFILES=[]
+
+EVTX_DUMP = 'bin/evtx_dump' + ('.exe' if platform.system() == 'Windows' else '')
+
+if os.path.exists(f'src/{EVTX_DUMP}'):
+    DATAFILES = [('bin', [f'src/{EVTX_DUMP}',]),]
+else:
+    DATAFILES = []
 KEYWORDS = ['evtx', 'json', 'csv', 'convert']
 #DATAFILES = [('data', ['src/data/template.xlsm',]),]
 
 setup(
     name=PROJECT_NAME,
-    version='0.0.1',
+    version=VERSION,
     description=DESCRIPTION,
-    author='Hosub Lee',
+    author=AUTHOR,
     author_email=EMAIL,
     install_requires=REQUIREMENTS,
     packages=find_packages(where='src'),
